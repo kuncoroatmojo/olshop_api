@@ -1,4 +1,10 @@
 class Order < ApplicationRecord
   belongs_to :user
-  belongs_to :coupon
+
+  validates :total, presence: true,
+                      numericality: { greater_than_or_equal_to: 0 }
+
+  validates :user_id, :status, presence: true
+  has_many :placements
+  has_many :products, through: :placements
 end
