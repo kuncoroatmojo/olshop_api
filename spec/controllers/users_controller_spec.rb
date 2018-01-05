@@ -7,9 +7,10 @@ RSpec.describe UsersController, type: :controller do
         get :show, params: {id: @user.id}
       end
 
-      it "returns the information about a reporter on a hash" do
+      it "returns the information about a user" do
         json = JSON.parse(response.body)
         expect(json['email']).to eql @user.email
+        puts json
       end
 
       it { should respond_with 200 }
