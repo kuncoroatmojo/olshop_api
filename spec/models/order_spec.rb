@@ -19,11 +19,17 @@ RSpec.describe Order, type: :model do
       product1 = FactoryGirl.create :product, price: 25.5
       product2 = FactoryGirl.create :product, price: 30.2
 
-      @order = FactoryGirl.build :order, product_ids: [product1.id, product2.id]
-    end
+      placement1 = FactoryGirl.build :placement, product: product1, quantity: 7
+      placement2 = FactoryGirl.build :placement, product: product2, quantity: 6
+
+      @order = FactoryGirl.build :order
+
+      @order.placements << placement1
+      @order.placements << placement2
+  end
 
     it "returns total amount of products price" do
-      expect{@order.set_total!}.to change{@order.total}.from(0).to(55.7)
+      expect{@order.set_total!}.to change{@order.total}.from(0).to(359.7)
     end
   end
 
