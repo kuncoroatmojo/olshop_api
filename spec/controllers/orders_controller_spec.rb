@@ -38,7 +38,7 @@ RSpec.describe OrdersController, type: :controller do
       expect(json['total']).to eql @order.total.to_s
     end
 
-    it "includes the total of the order" do
+    it "includes the product of the order" do
       json = JSON.parse(response.body)
       expect(json['products'].size).to eq(1)
     end

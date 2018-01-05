@@ -8,6 +8,7 @@ class Order < ApplicationRecord
 
   validates :user_id, presence: true
   validates :status, presence: true
+  validates_with StocksValidator
   has_many :placements
   has_many :products, through: :placements
 

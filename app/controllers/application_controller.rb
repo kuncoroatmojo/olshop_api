@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
 
   private
     def current_order
-      order ||= Order.find_by(:user_id => current_user.id, :status => "notfinalized")
+      order = Order.find_by(:user_id => current_user.id, :status => "notfinalized")
       if order.present?
         @current_order = order
       else

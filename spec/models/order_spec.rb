@@ -27,16 +27,22 @@ RSpec.describe Order, type: :model do
     end
   end
 
-  describe "#build_placements" do
+  describe "#valid?" do
     before(:each) do
-      product1 = FactoryGirl.create :product, price: 25.5
-      product2 = FactoryGirl.create :product, price: 30.2
+      product1 = FactoryGirl.create :product, price: 25.5, quantity: 3
+      product2 = FactoryGirl.create :product, price: 30.2, quantity: 10
 
-      @product_ids_and_quantities = [[product1.id, 2], [product2.id, 3]]
+      placement1 = FactoryGirl.build :placement, product: product1, quantity: 7
+      placement2 = FactoryGirl.build :placement, product: product2, quantity: 6
+
+      @order = FactoryGirl.build :order
+
+      @order.placements << placement1
+      @order.placements << placement2
     end
 
-    it "builds two placements" do
-      expect{order.build_placements(@product_ids_and_quantities)}.to change{order.placements.size}.from(0).to(2)
+    it "invalid due to product out of stock" do
+      expect(@order).to_not be_valid
     end
   end
 end
