@@ -4,5 +4,4 @@ FactoryGirl.define do
     product
     quantity 1
   end
-
 end

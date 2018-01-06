@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users, :only => [:show] do
       resources :orders, :only => [:index, :show, :create] do
         resources :placements, :only => [:index, :show, :add_product, :create, :destroy]
+        resources :placement_coupons, :only => [:index, :create, :destroy]
       end
     end
   #resources :products, :only => [:create, :update, :destroy]
