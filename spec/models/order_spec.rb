@@ -13,6 +13,8 @@ RSpec.describe Order, type: :model do
   it { should belong_to :user }
   it { should have_many(:placements) }
   it { should have_many(:products).through(:placements) }
+  it { should have_one(:placement_coupon) }
+  it { should have_one(:coupon).through(:placement_coupon) }
 
   describe '#set_total!' do
     before(:each) do

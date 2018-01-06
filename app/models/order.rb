@@ -11,6 +11,8 @@ class Order < ApplicationRecord
   validates_with StocksValidator
   has_many :placements
   has_many :products, through: :placements
+  has_one :placement_coupon
+  has_one :coupon, through: :placement_coupon
 
   def set_total!
     self.total = 0

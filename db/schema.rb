@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104161217) do
+ActiveRecord::Schema.define(version: 20180106150243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(version: 20180104161217) do
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["shipment_id"], name: "index_orders_on_shipment_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "placement_coupons", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "coupon_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coupon_id"], name: "index_placement_coupons_on_coupon_id"
+    t.index ["order_id"], name: "index_placement_coupons_on_order_id"
   end
 
   create_table "placements", force: :cascade do |t|
@@ -78,6 +87,8 @@ ActiveRecord::Schema.define(version: 20180104161217) do
 
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "users"
+  add_foreign_key "placement_coupons", "coupons"
+  add_foreign_key "placement_coupons", "orders"
   add_foreign_key "placements", "orders"
   add_foreign_key "placements", "products"
 end
