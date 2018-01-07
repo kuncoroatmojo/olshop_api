@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 679fd508c9f41f41b6df62024d67bc2281953395
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,8 +65,6 @@ GEM
     factory_girl_rails (4.9.0)
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
-    faker (1.8.7)
-      i18n (>= 0.7)
     ffi (1.9.18)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
@@ -167,7 +172,7 @@ DEPENDENCIES
   byebug
   database_cleaner
   factory_girl_rails (~> 4.0)
-  faker
+  faker!
   has_secure_token
   listen (>= 3.0.5, < 3.2)
   pg
