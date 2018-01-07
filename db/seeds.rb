@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 4.times do
+  require 'faker'
   User.create \
     email: Faker::Internet.email,
     password: "12345678",
@@ -15,6 +16,7 @@
 end
 
 3.times do
+  require 'faker'
   User.create \
     email: Faker::Internet.email,
     password: "12345678",
@@ -25,6 +27,7 @@ end
 end
 
 3.times do
+  require 'faker'
   User.create \
     email: Faker::Internet.email,
     password: "12345678",
@@ -33,6 +36,7 @@ end
 end
 
 30.times do
+  require 'faker'
   Product.create \
     name: Faker::Commerce.product_name,
     price: Faker::Commerce.price,
@@ -40,6 +44,7 @@ end
 end
 
 5.times do
+  require 'faker'
   Coupon.create \
     code: Faker::Commerce.promotion_code,
     valid_start: rand(3.months).seconds.ago,
@@ -50,6 +55,7 @@ end
 end
 
 5.times do
+  require 'faker'
   Coupon.create \
     code: Faker::Commerce.promotion_code,
     valid_start: rand(3.months).seconds.ago,
