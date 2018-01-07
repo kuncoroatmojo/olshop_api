@@ -16,7 +16,7 @@ class PlacementsController < ApplicationController
       placement.quantity = quantity
     end
     if placement.save
-      render json: placement, status: 201, location: [current_user, current_order, placement]
+      render json: placement, status: 201
     else
       render json: { errors: placement.errors }, status: 422
     end

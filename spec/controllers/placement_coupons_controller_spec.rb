@@ -6,8 +6,7 @@ RSpec.describe PlacementCouponsController, type: :controller do
       current_user = FactoryGirl.create :user
       request.headers['Authorization'] = current_user.token
       @coupon = FactoryGirl.create :coupon
-      @order = FactoryGirl.create :order, user: current_user
-      post :create, params: {user_id: current_user.id, order_id: @order.id, coupon_id: @coupon.id}
+      post :create, params: {user_id: current_user.id, coupon_id: @coupon.id}
     end
 
     it "returns the newly created placement_coupon" do
@@ -17,7 +16,7 @@ RSpec.describe PlacementCouponsController, type: :controller do
 
     it "embed the coupon object related to the placement_coupon" do
       json = JSON.parse(response.body)
-      expect(json['coupon_id']).to eql @coupon.id
+      expect(json['coupon']['id']).to eql @coupon.id
     end
 
     context 'when the order already have a coupon applied' do
@@ -56,7 +55,7 @@ RSpec.describe PlacementCouponsController, type: :controller do
 
     it "includes the coupon_id of the placement" do
       json = JSON.parse(response.body)
-      expect(json['coupon_id']).to eql @coupon.id
+      expect(json['coupon']['id']).to eql @coupon.id
     end
 
     it { should respond_with 200 }

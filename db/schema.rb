@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106150243) do
+ActiveRecord::Schema.define(version: 20180107073011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,9 +34,20 @@ ActiveRecord::Schema.define(version: 20180106150243) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "shipment_id"
+    t.text "address"
+    t.string "phone"
     t.index ["coupon_id"], name: "index_orders_on_coupon_id"
     t.index ["shipment_id"], name: "index_orders_on_shipment_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "payment_method"
+    t.text "proof"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "placement_coupons", force: :cascade do |t|
@@ -67,10 +78,13 @@ ActiveRecord::Schema.define(version: 20180106150243) do
   end
 
   create_table "shipments", force: :cascade do |t|
-    t.string "tracking_code"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_shipments_on_order_id"
+    t.index ["user_id"], name: "index_shipments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,8 +101,11 @@ ActiveRecord::Schema.define(version: 20180106150243) do
 
   add_foreign_key "orders", "coupons"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
   add_foreign_key "placement_coupons", "coupons"
   add_foreign_key "placement_coupons", "orders"
   add_foreign_key "placements", "orders"
   add_foreign_key "placements", "products"
+  add_foreign_key "shipments", "orders"
+  add_foreign_key "shipments", "users"
 end

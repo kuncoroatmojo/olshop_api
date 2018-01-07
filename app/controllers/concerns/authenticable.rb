@@ -9,4 +9,9 @@ module Authenticable
         render json: { errors: "Not authenticated" },
                     status: :unauthorized unless current_user.present?
     end
+
+    def authorize_admin
+      render json: { errors: "Not authenticated" },
+                  status: :unauthorized unless current_user.user_type == 'admin'
+    end
 end

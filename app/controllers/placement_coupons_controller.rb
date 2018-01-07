@@ -13,7 +13,8 @@ class PlacementCouponsController < ApplicationController
       placement_coupon.coupon = chosen_coupon
 
       if placement_coupon.save
-        render json: placement_coupon, status: 201, location: [current_user, current_order, placement_coupon]
+        placement_coupon.order.set_total!
+        render json: placement_coupon, status: 201
       else
         render json: { errors: placement_coupon.errors }, status: 422
       end

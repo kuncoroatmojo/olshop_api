@@ -10,7 +10,6 @@ RSpec.describe UsersController, type: :controller do
       it "returns the information about a user" do
         json = JSON.parse(response.body)
         expect(json['email']).to eql @user.email
-        puts json
       end
 
       it { should respond_with 200 }

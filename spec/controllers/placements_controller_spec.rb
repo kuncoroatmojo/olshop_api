@@ -7,8 +7,7 @@ RSpec.describe PlacementsController, type: :controller do
       request.headers['Authorization'] = current_user.token
       @product = FactoryGirl.create :product
       quantity = 5
-      @order = current_user.orders.create!
-      post :create, params: {user_id: current_user.id, order_id: @order.id, product_id: @product.id, quantity: quantity}
+      post :create, params: {user_id: current_user.id, product_id: @product.id, quantity: quantity}
     end
 
     it "returns the newly created placement" do
@@ -18,7 +17,7 @@ RSpec.describe PlacementsController, type: :controller do
 
     it "embed the product object related to the placement" do
       json = JSON.parse(response.body)
-      expect(json['product_id']).to eql @product.id
+      expect(json['product']['id']).to eql @product.id
     end
 
     it "embed the quantity of the placement" do
@@ -61,7 +60,7 @@ RSpec.describe PlacementsController, type: :controller do
 
     it "includes the product_id of the placement" do
       json = JSON.parse(response.body)
-      expect(json['product_id']).to eql @product.id
+      expect(json['product']['id']).to eql @product.id
     end
 
     it "includes the quantity of the placement" do
