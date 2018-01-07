@@ -32,8 +32,7 @@ RSpec.describe OrdersController, type: :controller do
 
     it "returns order records from a user" do
       json = JSON.parse(response.body)
-      #expect(json.size).to eq(1)
-      puts json
+      expect(json.size).to eq(1)
     end
 
     it { should respond_with 200 }
