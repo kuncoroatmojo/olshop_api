@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def index
     if current_user.user_type == 'admin'
       user = User.find(params[:user_id])
-      json_response(user.orders.where_not(status: 'notfinalized'))
+      json_response(user.orders.where.not(status: 'notfinalized'))
     else
       json_response(current_user.orders)
     end

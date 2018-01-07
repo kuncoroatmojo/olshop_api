@@ -6,7 +6,7 @@ RSpec.describe PlacementCouponsController, type: :controller do
       current_user = FactoryGirl.create :user
       request.headers['Authorization'] = current_user.token
       @coupon = FactoryGirl.create :coupon
-      post :create, params: {user_id: current_user.id, coupon_id: @coupon.id}
+      post :create, params: {coupon_id: @coupon.id}
     end
 
     it "returns the newly created placement_coupon" do
@@ -67,7 +67,7 @@ RSpec.describe PlacementCouponsController, type: :controller do
       request.headers['Authorization'] = current_user.token
       @order = current_user.orders.create!
       @placement_coupon = FactoryGirl.create :placement_coupon, order_id: @order.id
-      delete :destroy, params: { user_id: current_user.id, order_id: @order.id, id: @placement_coupon.id }
+      delete :destroy, params: { order_id: @order.id, id: @placement_coupon.id }
     end
 
     it { should respond_with 204 }

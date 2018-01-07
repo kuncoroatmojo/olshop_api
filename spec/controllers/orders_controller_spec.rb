@@ -18,6 +18,27 @@ RSpec.describe OrdersController, type: :controller do
     it { should respond_with 200 }
   end
 
+  describe "GET #index as admin" do
+    before(:each) do
+
+      current_user = FactoryGirl.create :user, user_type: 'admin'
+      request.headers['Authorization'] = current_user.token
+      thecustomer = FactoryGirl.create :user
+      @order = FactoryGirl.create :order, user: thecustomer, status: "finalized"
+      @product = FactoryGirl.create :product
+      @placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
+      get :index, params: {user_id: thecustomer.id}
+    end
+
+    it "returns order records from a user" do
+      json = JSON.parse(response.body)
+      #expect(json.size).to eq(1)
+      puts json
+    end
+
+    it { should respond_with 200 }
+  end
+
   describe "GET #show" do
     before(:each) do
       current_user = FactoryGirl.create :user
@@ -57,7 +78,7 @@ RSpec.describe OrdersController, type: :controller do
       @existing_placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
       @coupon = FactoryGirl.create :coupon
       @placement_coupon = FactoryGirl.create :placement_coupon, order_id: @order.id, coupon_id: @coupon.id
-      post :create, params: {user_id: current_user.id, address: address, phone: phone}
+      post :create, params: {address: address, phone: phone}
     end
 
     it "returns the newly created order" do
