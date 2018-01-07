@@ -5,8 +5,9 @@ RSpec.describe ShipmentsController, type: :controller do
   describe "POST #create" do
     before(:each) do
       current_user = FactoryGirl.create :user, user_type: 'admin'
+      thecustumer = FactoryGirl.create :user
       request.headers['Authorization'] = current_user.token
-      @order = FactoryGirl.create :order, user: current_user
+      @order = FactoryGirl.create :order, user: thecustumer
       @product = FactoryGirl.create :product
       @placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
       @order.status = "finalized"
@@ -65,8 +66,9 @@ RSpec.describe ShipmentsController, type: :controller do
   describe "PUT #update" do
     before(:each) do
       current_user = FactoryGirl.create :user, user_type: 'admin'
+      thecustumer = FactoryGirl.create :user
       request.headers['Authorization'] = current_user.token
-      @order = FactoryGirl.create :order, user: current_user
+      @order = FactoryGirl.create :order, user: thecustumer
       @product = FactoryGirl.create :product
       @placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
       @order.status = "finalized"

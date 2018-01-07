@@ -113,4 +113,45 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
 
+  describe "PUT #update" do
+    before(:each) do
+      current_user = FactoryGirl.create :user, user_type: 'admin'
+      request.headers['Authorization'] = current_user.token
+      thecustumer = FactoryGirl.create :user
+      @order = FactoryGirl.create :order, user: thecustumer
+      @product = FactoryGirl.create :product
+      @placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
+      @order.status = "finalized"
+      @payment = FactoryGirl.create :payment, order_id: @order.id
+      put :update, params: {id: @order.id, status: 'approved'} #approved, canceled, readyforshipment, shipped
+    end
+
+    it "returns the updated status" do
+      json = JSON.parse(response.body)
+      expect(json['status']).to eql 'approved'
+    end
+
+    it { should respond_with 200 }
+
+    context "user is not admin" do
+      before(:each) do
+        current_user = FactoryGirl.create :user
+        request.headers['Authorization'] = current_user.token
+        @order = FactoryGirl.create :order, user: current_user
+        @product = FactoryGirl.create :product
+        @placement = FactoryGirl.create :placement, order_id: @order.id, product_id: @product.id, quantity: 2
+        @order.status = "finalized"
+        @payment = FactoryGirl.create :payment, order_id: @order.id
+        @shipment = FactoryGirl.create :shipment, order_id: @order.id, status: 'delivering'
+        put :update, params: {id: @order.id, status: 'approved'} #approved, canceled, readyforshipment, shipped
+      end
+
+      it "returns errors" do
+        json = JSON.parse(response.body)
+        expect(json['errors'].size).to be_present
+      end
+
+      it { should respond_with 401 }
+    end
+  end
 end
