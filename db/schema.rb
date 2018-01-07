@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20180107073011) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "shipping_id"
     t.bigint "shipment_id"
     t.text "address"
     t.string "phone"
@@ -81,13 +82,12 @@ ActiveRecord::Schema.define(version: 20180107073011) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.bigint "order_id"
     t.index ["order_id"], name: "index_shipments_on_order_id"
-    t.index ["user_id"], name: "index_shipments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "username"
     t.string "password"
     t.string "user_type"
     t.string "name"
@@ -107,5 +107,4 @@ ActiveRecord::Schema.define(version: 20180107073011) do
   add_foreign_key "placements", "orders"
   add_foreign_key "placements", "products"
   add_foreign_key "shipments", "orders"
-  add_foreign_key "shipments", "users"
 end

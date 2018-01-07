@@ -96,7 +96,7 @@ RSpec.describe OrdersController, type: :controller do
       before(:each) do
         current_user = FactoryGirl.create :user
         request.headers['Authorization'] = current_user.token
-        @product = FactoryGirl.create :product
+        @product = FactoryGirl.create :product, quantity: 2
         address = "Bandung"
         phone = "081347899871"
         @order = current_user.orders.create!
