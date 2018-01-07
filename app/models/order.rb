@@ -19,6 +19,19 @@ class Order < ApplicationRecord
     placements.each do |placement|
       self.total += placement.product.price * placement.quantity
     end
+
+    if placement_coupon
+      coupon = placement_coupon.coupon
+      if coupon.amount_type == 'percentage'
+        self.total = self.total*(100-coupon.amount)/100
+      else
+        if self.total > coupon.amount
+          self.total -= coupon.amount
+        else
+          self.total = 0
+        end
+      end
+    end
   end
 
   def default_values

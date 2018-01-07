@@ -28,10 +28,31 @@ RSpec.describe Order, type: :model do
 
       @order.placements << placement1
       @order.placements << placement2
-  end
+    end
 
     it "returns total amount of products price" do
       expect{@order.set_total!}.to change{@order.total}.from(0).to(359.7)
+    end
+
+    context "there is a coupon applied" do
+      before(:each) do
+        product1 = FactoryGirl.create :product, price: 25.5
+        product2 = FactoryGirl.create :product, price: 30.2
+        coupon1 = FactoryGirl.create :coupon, amount: 15, amount_type: 'percentage'
+
+        placement1 = FactoryGirl.build :placement, product: product1, quantity: 7
+        placement2 = FactoryGirl.build :placement, product: product2, quantity: 6
+
+        @order = FactoryGirl.build :order
+
+        @order.placements << placement1
+        @order.placements << placement2
+        placement_coupon1 = FactoryGirl.create :placement_coupon, coupon: coupon1, order: @order
+      end
+
+      it "returns total amount of products price" do
+        expect(@order.set_total!.round(2)).to eq(305.75)
+      end
     end
   end
 
