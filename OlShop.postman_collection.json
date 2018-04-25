@@ -1,0 +1,397 @@
+{
+	"info": {
+		"name": "OlShop",
+		"_postman_id": "be7d86bf-d641-9b88-61de-7c70072e39f4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/products",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"products"
+					]
+				},
+				"description": "Get User"
+			},
+			"response": []
+		},
+		{
+			"name": "Coupons All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/coupons",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"coupons"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Users All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/users",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Placing Orders",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/placements",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"placements"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Applying Coupon",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/placement_coupons?coupon_id=6",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"placement_coupons"
+					],
+					"query": [
+						{
+							"key": "coupon_id",
+							"value": "6",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Delete Placement",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/placements/2&order_id=1",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"placements",
+						"2&order_id=1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Submit Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/orders?address=\"6602 Jerel Fall, Morarport\"&phone=\"262.514.6961\"",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "\"6602 Jerel Fall, Morarport\"",
+							"equals": true
+						},
+						{
+							"key": "phone",
+							"value": "\"262.514.6961\"",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Submit Payment Proof",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "proof",
+							"value": "\"https://cdn/18na82jao221fc53b4bc84d0swq98f73.jpg\"",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "order_id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/payments",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"payments"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Update Order Status",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ZnwNnhTRTBfajY5oZBbsZD7B"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/orders/1?status=approved",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"orders",
+						"1"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "approved",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Admin create shipment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/shipments/1",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"shipments",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Check Shipment ",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7x3VoY53ubUX4zrwVZcE8QM1"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/shipments/1",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"shipments",
+						"1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Create Shipment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "ZnwNnhTRTBfajY5oZBbsZD7B"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://murmuring-falls-22747.herokuapp.com/shipments?order_id=1&status=delivering",
+					"protocol": "https",
+					"host": [
+						"murmuring-falls-22747",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"shipments"
+					],
+					"query": [
+						{
+							"key": "order_id",
+							"value": "1",
+							"equals": true
+						},
+						{
+							"key": "status",
+							"value": "delivering",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
